@@ -26,10 +26,29 @@ def doall(func,args=[]): #Somewhat similar to map()
     return results
 
 def dorec(func,times,args=None): #Recursive
+    if times == 0:
+        return None
+    
     result = args
+    results = []
     for i in range(times):
-        result = func(result)
-    return result
+        if i!=0 and (isiterable(result) and not (isiterable(args) and len(args)==len(result) and getType(result)==getType(args))):
+            pass
+        else:
+            result = func(result)
+        if isiterable(result) and not (isiterable(args) and len(args)==len(result) and getType(result)==getType(args)): #If the function returns more values than it accepts as parameter, it loops through them in the recursive procedure
+            for item in result:
+                if getType(item)==getType(args) and (not isiterable(args) or (isiterable(args) and len(item)==len(args))):
+                    res = dorec(func,(times-i-1),item) #Does recursion, but only to the specified remaining depth (times-i)
+                    if res is not None and not (isiterable(res) and len(res)==0): #No empty list or None
+                        results.append(res) 
+    if len(results)==0:
+        return result
+    else:
+        return results
+
+def isiterable(item):
+    return isinstance(item,(list,tuple,dict))
 
 def islist(item):
     return isinstance(item,list)
@@ -49,6 +68,9 @@ def isdict(item):
 def istuple(item):
     return isinstance(item,tuple)
 
+def getType(item):
+    return item.__class__.__name__
+
 def setlength(item,length): #Sets a string to a certain length
     if length < len(item):
         return item[:length]
@@ -64,7 +86,7 @@ def inany(iterable,item):
     if item == iterable:
         return True
     
-    if isinstance(iterable,(list,dict,tuple)):
+    if isiterable(iterable):
         if item in iterable:
             return True
         
@@ -78,7 +100,7 @@ def inany(iterable,item):
         iterable=iterable.values() #If it's a dictionary, only looks at the values for sublists/dicts/tuples/etc; if the searched value was in the keys, it would be found by the simple "if item in" previously
         
     for member in iterable:
-        if isinstance(item,(str,list,dict,tuple)):
+        if isiterable(member) or isstring(member):
             if item == member: #e.g. inside a string that's inside a list
                 return True
             
@@ -86,7 +108,7 @@ def inany(iterable,item):
                 if item in iterable:
                     return True
                 
-            if isinstance(member,(list,dict,tuple)):
+            if isiterable(member):
                 if item in member:
                     return True
             
@@ -95,7 +117,7 @@ def inany(iterable,item):
                 return True
             else:
                 for submember in member.values():
-                    if isinstance(submember,(list,dict,tuple)):
+                    if isiterable(submember):
                         result = inany(submember,item) #Calls itself to infinitely check sublists
                         if result: #Returns if True, otherwise keeps searching
                             return True
@@ -109,3 +131,53 @@ def inany(iterable,item):
 
  
 #b = {"test" : 3, "other" : [1,2,[3,{"yo" : [3,"MisterL"]},4],5]}    
+
+
+def allIn(lst,otherlst): #all items of the first list in the second list
+    for item in lst:
+        if item not in otherlst:
+            return False
+    return True
+
+def anyIn(lst,otherlst): #any item from the first list in the second list
+    for item in lst:
+        if item in otherlst:
+            return True
+    return False
+
+def toDict(lst,otherlst): #Returns a dictionary with the first lst as keyset and the otherlst as valueset
+    if len(lst)<len(otherlst): #If the second list is longer, excess values are discarded silently
+        print("First list is shorter than the second list!")
+        raise Exception
+    d = {}
+    for i in range(len(lst)):
+        d[lst[i]]=otherlst[i]
+    return d
+    
+def numparse(string,decimals=False,decimalPoint='.'):
+    result = []
+    currentNum = ""
+    for item in string:
+        if item in ["1","2","3","4","5","6","7","8","9","0"]:
+            currentNum+=item
+        elif decimals and item == decimalPoint:
+            currentNum+=item
+        else:
+            if currentNum!="":
+                result.append(float(currentNum))
+                currentNum = ""
+                
+    if len(currentNum>0):
+        result.append(float(currentNum))
+    if len(result>1):
+        return result
+    else:
+        return result[0]
+
+def timeparse():
+    #TBD
+    pass
+
+def dateparse():
+    #TBD
+    pass
