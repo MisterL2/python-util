@@ -81,7 +81,7 @@ def circlePerimeter(r):
     return 2*pi*r
 
 def triangleArea(a,b,c=None):
-    if length is None: #first variable refers to base length, second variable refers to height
+    if c is None: #first variable refers to base length, second variable refers to height
         return 0.5*a*b
     else: #all 3 variables refer to side lengths
         from math import sqrt
