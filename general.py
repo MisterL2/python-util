@@ -154,7 +154,7 @@ def toDict(lst,otherlst): #Returns a dictionary with the first lst as keyset and
         d[lst[i]]=otherlst[i]
     return d
     
-def numparse(string,decimals=False,decimalPoint='.'):
+def numparse(string,decimals=False,decimalPoint='.'): #Returns a list of all numbers found in a string
     result = []
     currentNum = ""
     for item in string:
@@ -174,10 +174,17 @@ def numparse(string,decimals=False,decimalPoint='.'):
     else:
         return result[0]
 
-def timeparse():
-    #TBD
-    pass
+def timeparse(time):
+    import datetime
+    parsedTime = time.split(":")
+    if len(parsedTime) == 3:
+        return time(int(parsedTime[0]),int(parsedTime[1]),int(parsedTime[2]))
+    return time(int(parsedTime[0]),int(parsedTime[1]))
+    
 
-def dateparse():
-    #TBD
-    pass
+def dateparse(date,seperator='-',reverse=False):
+    import datetime
+    parsedDate = date.split(seperator)
+    if reverse:
+        parsedDate = list(reversed(parsedDate))
+    return datetime.date(int(parsedDate[0]),int(parsedDate[1]),int(parsedDate[2]))

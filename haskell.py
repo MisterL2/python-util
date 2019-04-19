@@ -18,7 +18,7 @@ def init(lst):
     return lst[:-1]
 
 def last(lst):
-    return lst[len(lst)-1]
+    return lst[-1]
 
 def head(lst):
     return lst[0]
