@@ -48,9 +48,3 @@ def replicate(amount,thing):
         for i in range(amount):
             lst.append(thing)
         return lst
-
-def replicate_string(amount,string):
-    new = string
-    while len(new)<amount:
-        new+=string
-    return new[:amount]
