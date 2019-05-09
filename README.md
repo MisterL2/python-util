@@ -30,7 +30,9 @@ will return [6,7,8]
 #### dorec(func, times, args=None, showResult=True)
 
 Recursively executes the given function, taking the previous output of the parameter function `func` as parameter.
-If the args param is not a list, tuple or dictionary, but the return value is, it will loop through all the returned values and apply the parameter function on them recursively until the remaining specified recursion depth is reached. This is determined by the `times` parameter and the current level of recursion.
+
+If the args param is not a list, tuple or dictionary, but the return value is, it will loop through all the returned values and apply the parameter function on them recursively until the remaining specified recursion depth is reached.
+This is determined by the `times` parameter and the current level of recursion.
 For example, if times=10 and the third iteration produces a list, the parameter function will be applied on the contents of that list 7 more times.
 
 ### Type Check Shorthands
@@ -76,9 +78,13 @@ Returns the type of that item as a string.
 
 #### inany(iterable, item, searchInSubstring=False)
 Recursively iterates through the target iterable and all nested iterables, meaning it will also check:
--All sublists, sublists of sublists, etc. for ALL iterables (lists, tuples, user-defined iterables)
--For dictionaries, it checks both the keys and the values, including any nested iterables within the values
--If searchInSubstring=True, it will also check if the `item` is a substring of any element.
+
+- All sublists, sublists of sublists, etc. for ALL iterables (lists, tuples, user-defined iterables)
+
+- For dictionaries, it checks both the keys and the values, including any nested iterables within the values
+
+- If searchInSubstring=True, it will also check if the `item` is a substring of any element.
+
 
 Example usage:
 ```python
@@ -107,7 +113,7 @@ Example usage
 ```python
 numparse("oeiajoefijaoi23jjaeofijaeof83fjoaefij9aeoiafj") #Returns [23, 83, 9]
 numparse("abaefjoi23.6ojaeoifjaojo36.5152aeof124ijeoafji3oij",True) #Returns [23.6, 36.5152, 124.0, 3.0]
-numparse("aojefioeojf23,33joijwoeifjaoiefjaoij99,99eafjoiejofjieaf,,,,aoiejfoiaejf.14eofij",True,",") #Returns [23.33, 99.99, 14.0]
+numparse("aojefioeojf23,33joijwoeifjaoiefjaoij99,99eaf,,,.f13",True,",") #Returns [23.33, 99.99, 13.0]
 ```
 
 #### timeparse(timestring)
