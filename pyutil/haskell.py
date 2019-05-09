@@ -4,53 +4,51 @@ def take(lst,amount):
     new = []
     for i in range(amount):
         new.append(lst[i])
+    if isinstance(lst,str):
+        return "".join(new)
     return new
 
 def drop(lst,amount):
     if amount > len(lst):
         return lst
     new = []
-    for i in range(amount):
-        new.append(lst.pop())
+    for i in range(len(lst)-amount,len(lst)):
+        new.append(lst[i])
+    if isinstance(lst,str):
+        return "".join(new)
     return new
-        
-def init(lst):
-    return lst[:-1]
+     
+def head(lst):
+    return lst[0]
 
 def last(lst):
     return lst[-1]
 
-def head(lst):
-    return lst[0]
+def init(lst):
+    return lst[:-1]
 
 def tail(lst):
     return lst[1:]
 
 def product(lst):
     product = lst[0]
-    if len(lst) == 1:
-        return product
-    else:
-        for number in lst[1:]:
-            product *= number
-        return product            
+    for number in lst[1:]:
+        product *= number
+    return product            
 
-def replicate(amount,thing):
+def cycle(thing,amount):
     lst = []
-    if isinstance(thing, list):
-        while True:
-            for item in thing:
-                if len(lst) < amount:
-                    lst.append(item)
-                else:
-                    return lst
-    else:
-        for i in range(amount):
-            lst.append(thing)
-        return lst
+    while True:
+        for item in thing:
+            if len(lst) < amount:
+                lst.append(item)
+            else:
+                if isinstance(thing, str):
+                    return "".join(lst)
+                return lst
 
-def replicate_string(amount,string):
-    new = string
-    while len(new)<amount:
-        new+=string
-    return new[:amount]
+def replicate(thing,amount):
+    lst = []
+    for i in range(amount):
+        lst.append(thing)
+    return lst

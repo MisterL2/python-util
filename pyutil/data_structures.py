@@ -4,16 +4,16 @@ class TreeNode:
             self.value = value #A valid value for all subnodes, None for masternode
         self.subNodes = {}
 
-    def addValue(self,valuechain):
-        firstValue, valuechain = valuechain[0],valuechain[1:] #Can never be empty, unless an empty list is passed to masternode
+    def addValue(self,valueiterable):
+        firstValue, valueiterable = valueiterable[0],valueiterable[1:] #Can never be empty, unless an empty list is passed to masternode
         if firstValue in self.subNodes:
             nextNode = self.subNodes[firstValue]
         else:
             nextNode = TreeNode(firstValue)
             self.subNodes[firstValue] = nextNode
             
-        if len(valuechain) > 0 : #Not Empty
-            nextNode.addValue(valuechain) #First index was removed
+        if len(valueiterable) > 0 : #Not Empty
+            nextNode.addValue(valueiterable) #First index was removed
 
     def findValue(self,searchedValue,returnNode=False):
         nextCharacter, searchedValue = searchedValue[0],searchedValue[1:]
@@ -32,8 +32,12 @@ class TreeNode:
     def findNode(self,searchedValue):
         return self.findValue(searchedValue,True)
 
+    def getSubNodeKeys(self):
+        return list(self.subNodes.keys())
+
 #Testing
 master = TreeNode()
 master.addValue("hello")
+master.addValue("hey")
 master.addValue("hi")
-master.addValue("how are you doing?")
+master.addValue("howdy")

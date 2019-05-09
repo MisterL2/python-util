@@ -1,21 +1,17 @@
 def fileappend(filename,thing):
     a = open(filename, 'a')
-    if not isinstance(thing, str):
-        thing = str(string)
-    a.write(thing)
+    a.write(str(thing))
     a.close()
 
-def overwrite(filename,thing):
+def fileoverwrite(filename,thing):
     a = open(filename, 'w')
-    if not isinstance(thing, str):
-        thing = str(string)
-    a.write(thing)
+    a.write(str(thing))
     a.close()
 
-def readAll(filename):
-    a = open(filename, 'r')
-    string = ""
-    for line in a:
-        string+=line
+def filereplace(filename,regexToReplace,replacementString):
+    a = open(filename, 'r+')
+    file_content = a.read()    
+    from re import sub
+    a.seek(0)
+    a.write(sub(regexToReplace,replacementString,file_content))
     a.close()
-    return string

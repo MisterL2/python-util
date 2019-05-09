@@ -28,13 +28,10 @@ def findPrimes(minimum,maximum): #Returns primes within a range
 
 def findFactors(num):
     factors = []
-    if isPrime(num):
-        factors.append(num)
-        return factors
 
     i = 1
     while num >= i**2: #>= because e.g. 9 -> 3*3
-        if num % i == 0 and i!=1:
+        if num % i == 0:
             factors.append(i)
             factors.append(int(num/i))
         i+=1 #1 in first iteration
@@ -55,13 +52,13 @@ def findFactorTuples(num):
         i+=1 #2 in first iteration
     return factorTuples
         
-def hasRoot(num,power=2): #Similar to math.sqrt() when power == 2
+def findIntegerRoot(num,power=2): #Similar to math.sqrt() when power == 2
     i = 1
     while num >= i**power:
         if num == i**power:
-            return True, i
+            return i
         i+=1
-    return False
+    #Returns None if there is no root!
 
 
 def findIntersect(eq1,eq2): #Both equations are tuples of form (gradient,start)
@@ -76,9 +73,9 @@ def findIntersect(eq1,eq2): #Both equations are tuples of form (gradient,start)
 def findGradient(coord1,coord2): #Both coordinates are tuples of form (x,y)
     return (coord2[1]-coord1[1])/(coord2[0]-coord1[0])
     
-def circlePerimeter(r):
+def circlePerimeter(radius):
     from math import pi
-    return 2*pi*r
+    return 2*pi*radius
 
 def triangleArea(a,b,c=None):
     if c is None: #first variable refers to base length, second variable refers to height
@@ -90,28 +87,28 @@ def triangleArea(a,b,c=None):
 
 def circleArea(radius):
     from math import pi
-    return r**2*pi
+    return radius**2*pi
 
 
 def trapezoidArea(a,b,d): #a and b refer to the parallel sides, d to the distance between them
     return d*(a+b)/2
 
 
-def sphereVolume(r):
+def sphereVolume(radius):
     from math import pi
-    return (4/3)*pi*r**3
+    return (4/3)*pi*radius**3
 
-def prismVolume(a,b,c=None):
+def prismVolume(a,b,c=None): #Aka 2D Triangle stretched out in one dimension
     if c is None:
-        return cylinderVolume(a,b)
+        return a*b
     else:
-        return a*b*c
+        return 0.5*a*b*c
 
-def cylinderVolume(area,height):
-    return area*height
+def cylinderVolume(radius,height):
+    return circleArea(radius)*height
 
-def pyramidVolume(area,height):
-    return area*height/3
+def pyramidVolume(area,height): #Aka 3D Triangle
+    return coneVolume(area,height) #pyramid is a cone
 
 def coneVolume(area,height):
-    return pyramidVolume(area,height)
+    return area*height/3

@@ -1,54 +1,49 @@
-def do(func, times, args=None):
-    result = None
+def do(func, times,showResult=True):
+    result = []
     for i in range(times):
-        if islist(args):
-            res = func(*args)
-        else:
-            if args is None:
-                res = func()
-            else:
-                res = func(args)
-                
-        if isinstance(res,(list,tuple,str,int,float)):
-            if result is None:
-                result = res
-            else:
-                try:
-                    result += res
-                except TypeError:
-                    pass
-    return result
+        result.append(func())
+    if showResult:
+        return result
     
-def doall(func,args=[]): #Somewhat similar to map()
-    results = []
-    for item in args:
-        results.append(func(item))
-    return results
+def doall(func,args=[],showResult=True): #Somewhat similar to map()
+    if showResult:
+        results = []
+        for item in args:
+            results.append(func(item))
+        return results
+    else:
+        for item in args:
+            func(item)
 
-def dorec(func,times,args=None): #Recursive
+def dorec(func,times,args=None,showResult=True): #Recursive
     if times == 0:
         return None
     
     result = args
     results = []
     for i in range(times):
-        if i!=0 and (isiterable(result) and not (isiterable(args) and len(args)==len(result) and getType(result)==getType(args))):
-            pass
-        else:
+        if not (i!=0 and (isiterable(result) and not (isiterable(args) and len(args)==len(result) and getType(result)==getType(args)))):
             result = func(result)
         if isiterable(result) and not (isiterable(args) and len(args)==len(result) and getType(result)==getType(args)): #If the function returns more values than it accepts as parameter, it loops through them in the recursive procedure
             for item in result:
                 if getType(item)==getType(args) and (not isiterable(args) or (isiterable(args) and len(item)==len(args))):
                     res = dorec(func,(times-i-1),item) #Does recursion, but only to the specified remaining depth (times-i)
                     if res is not None and not (isiterable(res) and len(res)==0): #No empty list or None
-                        results.append(res) 
-    if len(results)==0:
-        return result
-    else:
+                        results.append(res)
+    if showResult:
+        if len(results)==0:
+            return result
         return results
 
+def isiter(item): #Alias
+    return isiterable(item)
+
 def isiterable(item):
-    return isinstance(item,(list,tuple,dict))
+    try:
+        iter(item)
+        return True
+    except TypeError:
+        return False
 
 def islist(item):
     return isinstance(item,list)
@@ -71,26 +66,11 @@ def istuple(item):
 def getType(item):
     return item.__class__.__name__
 
-def setlength(item,length): #Sets a string to a certain length
-    if length < len(item):
-        return item[:length]
-    
-    if isstring(item):
-        return item + " "*(length-len(item))
-    elif islist(item):
-        while len(item) < length:
-            item.append(None)
-        return item
-
-def inany(iterable,item):
+def inany(iterable,item,searchInSubstring=False):
     if item == iterable:
         return True
     
     if isiterable(iterable):
-        if item in iterable:
-            return True
-        
-    if isstring(iterable) and isstring(item):
         if item in iterable:
             return True
         
@@ -103,6 +83,9 @@ def inany(iterable,item):
         if isiterable(member) or isstring(member):
             if item == member: #e.g. inside a string that's inside a list
                 return True
+            
+            if isstring(member) and searchInSubstring==False:
+                continue
             
             if isstring(iterable) and isstring(item):
                 if item in iterable:
@@ -118,12 +101,12 @@ def inany(iterable,item):
             else:
                 for submember in member.values():
                     if isiterable(submember):
-                        result = inany(submember,item) #Calls itself to infinitely check sublists
+                        result = inany(submember,item,searchInSubstring) #Calls itself to infinitely check sublists
                         if result: #Returns if True, otherwise keeps searching
                             return True
                         
         elif isinstance(member,(list,tuple)):
-            result = inany(member,item) #Calls itself to infinitely check sublists
+            result = inany(member,item,searchInSubstring) #Calls itself to infinitely check sublists
             if result: #Returns if True, otherwise keeps searching
                 return True
 
@@ -145,14 +128,10 @@ def anyIn(lst,otherlst): #any item from the first list in the second list
             return True
     return False
 
+#Similar to zip, but returns a dictionary rather than a list of tuples
 def toDict(lst,otherlst): #Returns a dictionary with the first lst as keyset and the otherlst as valueset
-    if len(lst)<len(otherlst): #If the second list is longer, excess values are discarded silently
-        print("First list is shorter than the second list!")
-        raise Exception
-    d = {}
-    for i in range(len(lst)):
-        d[lst[i]]=otherlst[i]
-    return d
+    size = min(len(lst),len(otherlst))
+    return {lst[i]:otherlst[i] for i in range(size)}
     
 def numparse(string,decimals=False,decimalPoint='.'): #Returns a list of all numbers found in a string
     result = []
@@ -160,21 +139,27 @@ def numparse(string,decimals=False,decimalPoint='.'): #Returns a list of all num
     for item in string:
         if item in ["1","2","3","4","5","6","7","8","9","0"]:
             currentNum+=item
-        elif decimals and item == decimalPoint:
-            currentNum+=item
+        elif decimals and item == decimalPoint and currentNum != "":
+            currentNum+='.' #Otherwise conversion doesnt work
         else:
             if currentNum!="":
-                result.append(float(currentNum))
+                if decimals:
+                    result.append(float(currentNum))
+                else:
+                    result.append(int(currentNum))
                 currentNum = ""
                 
-    if len(currentNum>0):
-        result.append(float(currentNum))
-    if len(result>1):
+    if len(currentNum)>0:
+        if decimals:
+            result.append(float(currentNum))
+        else:
+            result.append(int(currentNum))
+    if len(result)>1:
         return result
     else:
         return result[0]
 
-def timeparse(time):
+def timeparse(timestring):
     import datetime
     parsedTime = time.split(":")
     if len(parsedTime) == 3:
@@ -182,9 +167,12 @@ def timeparse(time):
     return time(int(parsedTime[0]),int(parsedTime[1]))
     
 
-def dateparse(date,seperator='-',reverse=False):
+def dateparse(datestring,seperator='-',reverse=False,american=False):
     import datetime
-    parsedDate = date.split(seperator)
+    parsedDate = datestring.split(seperator)
     if reverse:
         parsedDate = list(reversed(parsedDate))
-    return datetime.date(int(parsedDate[0]),int(parsedDate[1]),int(parsedDate[2]))
+    if american:
+        return datetime.date(int(parsedDate[0]),int(parsedDate[2]),int(parsedDate[1]))
+    else:
+        return datetime.date(int(parsedDate[0]),int(parsedDate[1]),int(parsedDate[2]))
