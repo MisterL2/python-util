@@ -1,8 +1,5 @@
 # python-util
 
-Documentation is WIP
-
-
 ## General
 
 
