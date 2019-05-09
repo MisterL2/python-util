@@ -1,4 +1,4 @@
-#(c) MisterL2
+#(c) MisterL2 2019
 
 from .haskell import *
 from .general import *
