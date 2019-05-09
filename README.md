@@ -5,7 +5,11 @@ Documentation is WIP
 
 ## General
 
+
 ### Functional Programming
+
+
+
 
 #### do(func, times, showResult=True)
 
@@ -35,7 +39,11 @@ If the args param is not a list, tuple or dictionary, but the return value is, i
 This is determined by the `times` parameter and the current level of recursion.
 For example, if times=10 and the third iteration produces a list, the parameter function will be applied on the contents of that list 7 more times.
 
+
+
 ### Type Check Shorthands
+
+
 
 #### isiter(item) / isiterable(item)
 Checks if the item is an iterable
@@ -74,7 +82,13 @@ isinstance(item,tuple)
 #### getType(item)
 Returns the type of that item as a string.
 
+
+
 ### Iterables
+
+
+
+
 
 #### inany(iterable, item, searchInSubstring=False)
 Recursively iterates through the target iterable and all nested iterables, meaning it will also check:
@@ -103,7 +117,13 @@ Checks if **any** of the elements from `lst` are in `otherlst`
 Combines two lists into a dictionary, with `lst` as keys and `otherlst` as values.
 If the two lists are of different size, the excess values in the longer list are discarded.
 
+
+
 ### Parsing
+
+
+
+
 
 #### numparse(string, decimals=False, decimalPoint='.')
 Parses all numbers out of a given string and returns them in a list.
@@ -126,3 +146,71 @@ Expects a datestring in a standard format (e.g. YYYY-MM-DD, YY-M-DD, etc.)
 The seperator can be changed to parse different notations, e.g. 2019/08/12
 If reverse=True, parses a date of format DD-MM-YYYY or similar
 If american=True, expects YYYY-DD-MM (or MM-DD-YYYY if reverse=True) or similar format
+
+
+## Files
+Shorthands for simple file operations.
+### Shorthands
+
+#### fileappend(filename, thing)
+Will open the file and append the `thing` to the end of the file. Will convert to string if necessary and close file after use.
+
+#### fileoverwrite(filename, thing)
+Will open the file and overwrite the file contents with the `thing`. Will convert to string if necessary and close file after use.
+
+#### filereplace(filename, regexToReplace, replacementString)
+Will open the file and replace anything that matches the regex `regexToReplace` with the `replacementString`. Closes file after use.
+
+## Haskell
+Implements common Haskell convenience features
+
+### List features
+All except `product` work on strings as well.
+
+#### take(lst, amount)
+Returns the first `amount` indexes of the `lst`.
+
+#### drop(lst,amount)
+Returns the last `amount` indexes of the `lst`.
+
+#### last(lst)
+Returns the last index of `lst`-
+
+#### head(lst)
+Returns the first index of `lst`-
+
+#### init(lst)
+Returns all indexes of `lst` except for the last.
+
+#### tail(lst)
+Returns all indexes of `lst` except for the first.
+
+#### product(lst)
+Returns the product of all members of the list multiplied together. Somewhat similar to built-in function `sum()`
+
+#### cycle(thing, amount)
+Cycles a list or string and returns the first `amount` characters from it.
+```python
+cycle("TEST",3)
+```
+is effectively equal to
+```haskell
+take 3 (cycle "TEST")
+```
+
+Example usage:
+```python
+cycle("TEST ",17) #Returns 'TEST TEST TEST TE'
+cycle([1,2,3,4],10) #Returns [1, 2, 3, 4, 1, 2, 3, 4, 1, 2]
+```
+
+#### replicate(thing, amount)
+Replicates the given thing and returns a list containing the object `amount` times.
+
+Example usage:
+```python
+replicate(15,3) #Returns [15, 15, 15]
+replicate(True,3) #Returns [True, True, True]
+replicate("Hello",5) #Returns ['Hello', 'Hello', 'Hello', 'Hello', 'Hello']
+replicate([1,2,3,4],3) #Returns [[1, 2, 3, 4], [1, 2, 3, 4], [1, 2, 3, 4]]
+```
