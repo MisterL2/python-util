@@ -324,8 +324,8 @@ Returns a list of all the values of the subNodes
 Returns a dictionary of {value:SubNode}
 
 
-Finds a value in the tree
-Converts any iterable into tree format, with each Node containing one element.
+### Explanation
+
 For example, the string "TEST" has 4 elements and would be converted into a tree with 4 Nodes:
 
     "T" -> "E" -> "S" -> "T"
@@ -340,7 +340,8 @@ If we now add the string "TEA" to the same tree, we get:
 The second Node (with value "E") now has two SubNodes, one with value "S" and one with value "A"
 The values "T" and "E" are not added a second time, as they are already in the tree.
 
-Full example:
+### Full example
+
 ```python
 #Create TreeNode object
 master = TreeNode()
@@ -400,7 +401,7 @@ What if we want to find all SubNodes of a Node, e.g. of the "e" from "he" (which
 
 ```python
 otherNode.subNodes
-#Returns {'l':<Node Object>, 'y':<Node Object>, 'r':<Node Object>}
+#Returns {'l':<TreeNode Object>, 'y':<TreeNode Object>, 'r':<TreeNode Object>}
 
 #If we wanted to get the Node of the 'r' that follows this Node, we could do the following
 yetAnotherNode = otherNode.subNodes['r']
