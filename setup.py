@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="py3utils",
+    name="python-util",
     version="1.0",
     author="MisterL2",
     author_email="misterl2@gmx.net",
