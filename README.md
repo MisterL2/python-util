@@ -123,8 +123,9 @@ If the two lists are of different size, the excess values in the longer list are
 
 
 
-#### numparse(string, decimals=False, decimalPoint='.')
+#### numparse(string, decimals=False, decimalPoint='.', negatives=True)
 Parses all numbers out of a given string and returns them in a list.
+If negatives=False, all `-` signs will be ignored and only positive numbers returned.
 If decimals=True, it will also parse out decimals numbers using the `decimalPoint`. `decimalPoint` can also be set to different values, e.g. ',' when parsing German numbers.
 
 Example usage
