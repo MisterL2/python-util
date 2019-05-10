@@ -11,6 +11,7 @@
 #### do(func, times, showResult=True)
 
 Executes the specified parameter function `func` `times` amount of times. If showResult=True, it returns a list of the results.
+
 Example usage:
 
 ```python
@@ -19,7 +20,8 @@ do(lambda : print("hello"), 5) #Will print "hello" 5 times
 
 #### doall(func, args=[], showResult=True)
 
-Executes the given function for a list of arguments
+Executes the given function for a list of arguments.
+
 Example usage:
 
 ```python
