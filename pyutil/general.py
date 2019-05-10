@@ -133,7 +133,7 @@ def toDict(lst,otherlst): #Returns a dictionary with the first lst as keyset and
     size = min(len(lst),len(otherlst))
     return {lst[i]:otherlst[i] for i in range(size)}
     
-def numparse(string,decimals=False,decimalPoint='.'): #Returns a list of all numbers found in a string
+def numparse(string,decimals=False,decimalPoint='.',negatives=True): #Returns a list of all numbers found in a string
     result = []
     currentNum = ""
     for item in string:
@@ -141,8 +141,17 @@ def numparse(string,decimals=False,decimalPoint='.'): #Returns a list of all num
             currentNum+=item
         elif decimals and item == decimalPoint and currentNum != "":
             currentNum+='.' #Otherwise conversion doesnt work
+        elif item == '-' and negatives:
+            if currentNum != "":
+                #Add previous number first, e.g. in case eiojasoefij23-25 would save 23, -25
+                if decimals:
+                    result.append(float(currentNum))
+                else:
+                    result.append(int(currentNum))
+                currentNum = ""
+            currentNum += item
         else:
-            if currentNum!="":
+            if currentNum not in ["","-"]:
                 if decimals:
                     result.append(float(currentNum))
                 else:
@@ -154,10 +163,7 @@ def numparse(string,decimals=False,decimalPoint='.'): #Returns a list of all num
             result.append(float(currentNum))
         else:
             result.append(int(currentNum))
-    if len(result)>1:
-        return result
-    else:
-        return result[0]
+    return result
 
 def timeparse(timestring):
     import datetime

@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="python-util",
-    version="1.0.1",
+    version="1.1.1",
     author="MisterL2",
     author_email="misterl2@gmx.net",
     description="A small python utilities addon",
