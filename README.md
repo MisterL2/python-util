@@ -167,16 +167,16 @@ Implements common Haskell convenience features
 All except `product` work on strings as well.
 
 #### take(lst, amount)
-Returns the first `amount` indexes of the `lst`.
+Returns the first `amount` indexes of the `lst`
 
 #### drop(lst,amount)
-Returns the last `amount` indexes of the `lst`.
+Returns the last `amount` indexes of the `lst`
 
 #### last(lst)
-Returns the last index of `lst`-
+Returns the last index of `lst`
 
 #### head(lst)
-Returns the first index of `lst`-
+Returns the first index of `lst`
 
 #### init(lst)
 Returns all indexes of `lst` except for the last.
