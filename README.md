@@ -112,7 +112,7 @@ Checks if **all** of the elements from `lst` are in `otherlst`
 Checks if **any** of the elements from `lst` are in `otherlst`
 
 #### toDict(lst, otherlst)
-Combines two lists into a dictionary, with `lst` as keys and `otherlst` as values.
+Combines two lists into a dictionary, with `lst` as keys and `otherlst` as values.  
 If the two lists are of different size, the excess values in the longer list are discarded.
 
 
@@ -124,8 +124,8 @@ If the two lists are of different size, the excess values in the longer list are
 
 
 #### numparse(string, decimals=False, decimalPoint='.', negatives=True)
-Parses all numbers out of a given string and returns them in a list.
-If negatives=False, all `-` signs will be ignored and only positive numbers returned.
+Parses all numbers out of a given string and returns them in a list.  
+If negatives=False, all `-` signs will be ignored and only positive numbers returned.  
 If decimals=True, it will also parse out decimals numbers using the `decimalPoint`. `decimalPoint` can also be set to different values, e.g. ',' when parsing German numbers.
 
 Example usage
@@ -136,15 +136,15 @@ numparse("aojefioeojf23,33joijwoeifjaoiefjaoij99,99eaf,,,.f13",True,",") #Return
 ```
 
 #### timeparse(timestring)
-Expects a string in format HH:MM or HH:MM:SS
+Expects a string in format HH:MM or HH:MM:SS  
 Returns a datetime object (with or without seconds) from the parameter string
 
 
 #### dateparse(datestring, seperator='-', reverse=False, american=False)
-Expects a datestring in a standard format (e.g. YYYY-MM-DD, YY-M-DD, etc.)
-The seperator can be changed to parse different notations, e.g. 2019/08/12
-If reverse=True, parses a date of format DD-MM-YYYY or similar
-If american=True, expects YYYY-DD-MM (or MM-DD-YYYY if reverse=True) or similar format
+Expects a datestring in a standard format (e.g. YYYY-MM-DD, YY-M-DD, etc.)  
+The seperator can be changed to parse different notations, e.g. 2019/08/12  
+If reverse=True, parses a date of format DD-MM-YYYY or similar  
+If american=True, expects YYYY-DD-MM (or MM-DD-YYYY if reverse=True) or similar format  
 
 
 ## Files
@@ -167,16 +167,16 @@ Implements common Haskell convenience features
 All except `product` work on strings as well.
 
 #### take(lst, amount)
-Returns the first `amount` indexes of the `lst`.
+Returns the first `amount` indexes of the `lst`
 
 #### drop(lst,amount)
-Returns the last `amount` indexes of the `lst`.
+Returns the last `amount` indexes of the `lst`
 
 #### last(lst)
-Returns the last index of `lst`-
+Returns the last index of `lst`
 
 #### head(lst)
-Returns the first index of `lst`-
+Returns the first index of `lst`
 
 #### init(lst)
 Returns all indexes of `lst` except for the last.
@@ -227,7 +227,7 @@ Checks if the given number is a prime.
 Returns all in `range(minimum,maximum)`
 
 #### findFactors(num)
-Returns a list of all factors of the given number, including 1 and the number itself.
+Returns a list of all factors of the given number, including 1 and the number itself.  
 Example usage:
 ```python
 findFactors(120) #Returns [1, 120, 2, 60, 3, 40, 4, 30, 5, 24, 6, 20, 8, 15, 10, 12]
@@ -235,7 +235,7 @@ findFactors(67) #Returns [1, 67]
 ```
 
 #### findFactorTuples(num)
-Returns all factors of the given number in a list of tuples, including 1 and the number itself.
+Returns all factors of the given number in a list of tuples, including 1 and the number itself.  
 Example usage:
 ```python
 findFactors(120) #Returns [(1, 120), (2, 60), (3, 40), (4, 30), (5, 24), (6, 20), (8, 15), (10, 12)]
@@ -243,7 +243,7 @@ findFactors(67) #Returns [(1, 67)]
 ```
 
 #### findIntegerRoot(num,power=2)
-Finds the integer x, such that x \*\* `power` is equal to `num`. Returns None if there is no integer root.
+Finds the integer x, such that x \*\* `power` is equal to `num`. Returns None if there is no integer root.  
 Example usage:
 ```python
 findIntegerRoot(100) #Returns 10
@@ -255,11 +255,11 @@ findIntegerRoot(13) #Returns None
 ### 2D Linear equations
 
 #### findIntersect(eq1,eq2)
-Expects two equations in the tuple form (m,c) aka (gradient,start) for a linear equation of type `y = mx + c`.
-Returns a tuple with values (x,y) representing the Cartesian coordinates at which these two equations are equal.
+Expects two equations in the tuple form (m,c) aka (gradient,start) for a linear equation of type `y = mx + c`.  
+Returns a tuple with values (x,y) representing the Cartesian coordinates at which these two equations are equal.  
 
 #### findGradient(coord1,coord2)
-Expects two position vectors in tuple form (x,y).
+Expects two position vectors in tuple form (x,y).  
 Returns the gradient of the line connecting them
 
 ### 2D Geometry
@@ -268,15 +268,15 @@ Returns the gradient of the line connecting them
 Returns the perimeter of a circle with given `radius`.
 
 #### triangleArea(a,b,c=None)
-**Either** expects three parameters representing the three sides of the triangle,
-**or** expects two parameters representing the base length and height of the triangle.
+**Either** expects three parameters representing the three sides of the triangle,  
+**or** expects two parameters representing the base length and height of the triangle.  
 Returns the area of the triangle.
 
 #### circleArea(radius)
 Returns the area of a circle with given `radius`.
 
 #### trapezoidArea(a,b,d)
-Expects the lengths of the parallel sides `a` and `b`, as well as the distance between them `d`.
+Expects the lengths of the parallel sides `a` and `b`, as well as the distance between them `d`.  
 Returns the area of the trapezoid.
 
 ### 3D Geometry
@@ -285,8 +285,8 @@ Returns the area of the trapezoid.
 Returns the volume of a sphere with the given `radius`.
 
 #### prismVolume(a,b,c=None)
-**Either** expects three parameters representing length, width and height of the prism,
-**or** expects two parameters representing the area of the base and the height of the prism
+**Either** expects three parameters representing length, width and height of the prism,  
+**or** expects two parameters representing the area of the base and the height of the prism  
 Returns the volume of the prism.
 
 #### cylinderVolume(radius, height)
@@ -309,7 +309,7 @@ Additional complex data structures for Python.
 Adds all values of the valueiterable to the tree, **starting from that Node**
 
 #### Node.findValue(self,value,returnNode=False)
-Returns True if the `value` can be found **downwards of that Node**, False if it cannot.
+Returns True if the `value` can be found **downwards of that Node**, False if it cannot.  
 If returnNode=True, it instead returns the Node with that value, or None.
 
 #### Node.findNode(self,value)
@@ -337,7 +337,7 @@ If we now add the string "TEA" to the same tree, we get:
     "T" -> "E" -> "S" -> "T"
                -> "A"
 
-The second Node (with value "E") now has two SubNodes, one with value "S" and one with value "A"
+The second Node (with value "E") now has two SubNodes, one with value "S" and one with value "A"  
 The values "T" and "E" are not added a second time, as they are already in the tree.
 
 ### Full example
@@ -372,7 +372,7 @@ node = master.findNode("howd")
 otherNode = master.findNode("he")
 ```
 
-If we call a method on a node of the tree, we call it **from that position**
+If we call a method on a node of the tree, we call it **from that position**  
 So, for example:
 
 ```python
