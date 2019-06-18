@@ -167,10 +167,10 @@ def numparse(string,decimals=False,decimalPoint='.',negatives=True): #Returns a 
 
 def timeparse(timestring):
     import datetime
-    parsedTime = time.split(":")
+    parsedTime = timestring.split(":")
     if len(parsedTime) == 3:
-        return time(int(parsedTime[0]),int(parsedTime[1]),int(parsedTime[2]))
-    return time(int(parsedTime[0]),int(parsedTime[1]))
+        return datetime.time(int(parsedTime[0]),int(parsedTime[1]),int(parsedTime[2]))
+    return datetime.time(int(parsedTime[0]),int(parsedTime[1]))
     
 
 def dateparse(datestring,seperator='-',reverse=False,american=False):
