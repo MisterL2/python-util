@@ -18,7 +18,7 @@ Example usage:
 do(lambda : print("hello"), 5) #Will print "hello" 5 times
 ```
 
-#### doall(func, args=[], showResult=True)
+#### doall(func, args, showResult=True)
 
 Executes the given function for a list of arguments.
 
@@ -121,10 +121,15 @@ If the two lists are of different size, the excess values in the longer list are
 
 
 
+#### intput(msg, error=None) -> int
+
+Shorthand for `int(input(msg))`, but also handles any potential exceptions resulting from unexpected user input, such as strings, floats and unsupported unicode characters. It will continue asking the message `msg` until it receives a valid answer.  
+If the parameter `error` is supplied, it will also print that error message after each invalid input.
+This function is guaranteed to return an integer.
 
 
 #### numparse(string, decimals=False, decimalPoint='.', negatives=True)
-Parses all numbers out of a given string and returns them in a list.  
+Parses all numbers out of a given string and returns them in a list. Will return an empty list if there are no numbers in the string.  
 If negatives=False, all `-` signs will be ignored and only positive numbers returned.  
 If decimals=True, it will also parse out decimals numbers using the `decimalPoint`. `decimalPoint` can also be set to different values, e.g. ',' when parsing German numbers.
 
