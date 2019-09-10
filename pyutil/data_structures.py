@@ -36,8 +36,10 @@ class TreeNode:
         return list(self.subNodes.keys())
 
 #Testing
+'''
 master = TreeNode()
 master.addValue("hello")
 master.addValue("hey")
 master.addValue("hi")
 master.addValue("howdy")
+'''

@@ -15,7 +15,7 @@ def isPrime(num):
             return False
         i+=1 #2 in first iteration, as a number is always divisible by 1.
     return True #if no divisors found, it is a prime
-        
+
 
 
 def findPrimes(minimum,maximum): #Returns primes within a range
@@ -72,7 +72,7 @@ def findIntersect(eq1,eq2): #Both equations are tuples of form (gradient,start)
 
 def findGradient(coord1,coord2): #Both coordinates are tuples of form (x,y)
     return (coord2[1]-coord1[1])/(coord2[0]-coord1[0])
-    
+   
 def circlePerimeter(radius):
     from math import pi
     return 2*pi*radius

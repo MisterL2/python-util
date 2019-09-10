@@ -31,10 +31,10 @@ def tail(lst):
     return lst[1:]
 
 def product(lst):
-    product = lst[0]
+    prdct = lst[0]
     for number in lst[1:]:
-        product *= number
-    return product            
+        prdct *= number
+    return prdct            
 
 def cycle(thing,amount):
     lst = []
@@ -49,6 +49,6 @@ def cycle(thing,amount):
 
 def replicate(thing,amount):
     lst = []
-    for i in range(amount):
+    for _ in range(amount):
         lst.append(thing)
     return lst

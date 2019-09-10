@@ -1,11 +1,12 @@
 def do(func, times,showResult=True):
     result = []
-    for i in range(times):
+    for _ in range(times):
         result.append(func())
     if showResult:
         return result
-    
-def doall(func,args=[],showResult=True): #Somewhat similar to map()
+
+
+def doall(func,args,showResult=True): #Somewhat similar to map()
     if showResult:
         results = []
         for item in args:
@@ -15,10 +16,10 @@ def doall(func,args=[],showResult=True): #Somewhat similar to map()
         for item in args:
             func(item)
 
+
 def dorec(func,times,args=None,showResult=True): #Recursive
     if times == 0:
         return None
-    
     result = args
     results = []
     for i in range(times):
@@ -63,7 +64,7 @@ def isdict(item):
 def istuple(item):
     return isinstance(item,tuple)
 
-def getType(item):
+def getType(item): #Returns the name in readable form such as 'int', rather than <class 'int'> from type()
     return item.__class__.__name__
 
 def inany(iterable,item,searchInSubstring=False):
@@ -133,7 +134,7 @@ def toDict(lst,otherlst): #Returns a dictionary with the first lst as keyset and
     size = min(len(lst),len(otherlst))
     return {lst[i]:otherlst[i] for i in range(size)}
     
-def numparse(string,decimals=False,decimalPoint='.',negatives=True): #Returns a list of all numbers found in a string
+def numparse(string,decimals=False,decimalPoint='.',negatives=True) -> list: #Returns a list of all numbers found in a string
     result = []
     currentNum = ""
     for item in string:
@@ -173,7 +174,7 @@ def timeparse(timestring):
     return datetime.time(int(parsedTime[0]),int(parsedTime[1]))
     
 
-def dateparse(datestring,seperator='-',reverse=False,american=False):
+def dateparse(datestring,seperator='.',reverse=False,american=False):
     import datetime
     parsedDate = datestring.split(seperator)
     if reverse:
