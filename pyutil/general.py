@@ -183,3 +183,14 @@ def dateparse(datestring,seperator='.',reverse=False,american=False):
         return datetime.date(int(parsedDate[0]),int(parsedDate[2]),int(parsedDate[1]))
     else:
         return datetime.date(int(parsedDate[0]),int(parsedDate[1]),int(parsedDate[2]))
+
+def intput(msg,error=None) -> int:
+    response = None
+    while response is None:
+        try:
+            response = int(input(msg))
+        except Exception: #Catches both ValueError and UnicodeExceptions
+            if error is not None:
+                print(error)
+    return response
+        
