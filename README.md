@@ -1,5 +1,13 @@
 # python-util
 
+## Importing  
+
+Within python, the package is named `pyutil`, so import it like this:
+
+```python
+import pyutil
+```
+
 ## General
 
 
