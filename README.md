@@ -3,85 +3,6 @@
 ## General
 
 
-### Functional Programming
-
-
-
-
-#### do(func, times, showResult=True)
-
-Executes the specified parameter function `func` `times` amount of times. If showResult=True, it returns a list of the results.
-
-Example usage:
-
-```python
-do(lambda : print("hello"), 5) #Will print "hello" 5 times
-```
-
-#### doall(func, args, showResult=True)
-
-Executes the given function for a list of arguments.
-
-Example usage:
-
-```python
-do(addFive, [1,2,3],True) #Returns [6,7,8]
-```
-
-
-#### dorec(func, times, args=None, showResult=True)
-
-Recursively executes the given function, taking the previous output of the parameter function `func` as parameter.
-
-If the args param is not a list, tuple or dictionary, but the return value is, it will loop through all the returned values and apply the parameter function on them recursively until the remaining specified recursion depth is reached.
-This is determined by the `times` parameter and the current level of recursion.
-For example, if times=10 and the third iteration produces a list, the parameter function will be applied on the contents of that list 7 more times.
-
-
-
-### Type Check Shorthands
-
-
-
-#### isiter(item) / isiterable(item)
-Checks if the item is an iterable
-
-
-#### islist(item)
-```python
-isinstance(item,list)
-```
-
-#### isint(item)
-```python
-isinstance(item,int)
-```
-
-#### isfloat(item)
-```python
-isinstance(item,float)
-```
-
-#### isstring(item)
-```python
-isinstance(item,str)
-```
-
-#### isdict(item)
-```python
-isinstance(item,dict)
-```
-
-#### istuple(item)
-```python
-isinstance(item,tuple)
-```
-
-#### getType(item)
-Returns the type of that item as a string.
-
-
-
 ### Iterables
 
 
@@ -164,6 +85,87 @@ Will open the file and overwrite the file contents with the `thing`. Will conver
 
 #### filereplace(filename, regexToReplace, replacementString)
 Will open the file and replace anything that matches the regex `regexToReplace` with the `replacementString`. Closes file after use.
+
+### Functional Programming
+
+
+
+
+#### do(func, times, showResult=True)
+
+Executes the specified parameter function `func` `times` amount of times. If showResult=True, it returns a list of the results.
+
+Example usage:
+
+```python
+do(lambda : print("hello"), 5) #Will print "hello" 5 times
+```
+
+#### doall(func, args, showResult=True)
+
+Executes the given function for a list of arguments.
+
+Example usage:
+
+```python
+do(addFive, [1,2,3],True) #Returns [6,7,8]
+```
+
+
+#### dorec(func, times, args=None, showResult=True)
+
+Recursively executes the given function, taking the previous output of the parameter function `func` as parameter.
+
+If the args param is not a list, tuple or dictionary, but the return value is, it will loop through all the returned values and apply the parameter function on them recursively until the remaining specified recursion depth is reached.
+This is determined by the `times` parameter and the current level of recursion.
+For example, if times=10 and the third iteration produces a list, the parameter function will be applied on the contents of that list 7 more times.
+
+
+
+### Type Check Shorthands
+
+
+
+#### isiter(item) / isiterable(item)
+Checks if the item is an iterable
+
+
+#### islist(item)
+```python
+isinstance(item,list)
+```
+
+#### isint(item)
+```python
+isinstance(item,int)
+```
+
+#### isfloat(item)
+```python
+isinstance(item,float)
+```
+
+#### isstring(item)
+```python
+isinstance(item,str)
+```
+
+#### isdict(item)
+```python
+isinstance(item,dict)
+```
+
+#### istuple(item)
+```python
+isinstance(item,tuple)
+```
+
+#### getType(item)
+Returns the type of that item as a string.
+
+
+
+
 
 ## Haskell
 Implements common Haskell convenience features
