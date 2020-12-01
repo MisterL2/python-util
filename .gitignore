@@ -4,3 +4,4 @@ python_util.egg-info
 build.bat
 setup.py
 desktop.ini
+__pycache__

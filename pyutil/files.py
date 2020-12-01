@@ -10,8 +10,9 @@ def fileoverwrite(filename,thing):
 
 def filereplace(filename,regexToReplace,replacementString):
     a = open(filename, 'r+')
-    file_content = a.read()    
+    file_content = a.read()
     from re import sub
     a.seek(0)
+    a.truncate(0)
     a.write(sub(regexToReplace,replacementString,file_content))
     a.close()
