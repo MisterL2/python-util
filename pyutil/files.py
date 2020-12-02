@@ -8,11 +8,15 @@ def fileoverwrite(filename,thing):
     a.write(str(thing))
     a.close()
 
-def filereplace(filename,regexToReplace,replacementString):
+def filereplace(filename, patternToReplace, replacementString, regex=False):
     a = open(filename, 'r+')
     file_content = a.read()
-    from re import sub
+    if regex:
+        from re import sub
+        new_content = sub(patternToReplace,replacementString,file_content)
+    else:
+        new_content = file_content.replace(patternToReplace,replacementString)
     a.seek(0)
     a.truncate(0)
-    a.write(sub(regexToReplace,replacementString,file_content))
+    a.write(new_content)
     a.close()
