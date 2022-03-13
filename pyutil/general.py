@@ -166,6 +166,7 @@ def numparse(string,decimals=False,decimalPoint='.',negatives=True) -> list: #Re
             result.append(int(currentNum))
     return result
 
+# DOES NOT WORK WITH PYTHON 3 DATETIME? CHECK
 def timeparse(timestring):
     import datetime
     parsedTime = timestring.split(":")
@@ -174,17 +175,18 @@ def timeparse(timestring):
     return datetime.time(int(parsedTime[0]),int(parsedTime[1]))
     
 
+# DOES NOT WORK WITH PYTHON 3 DATETIME? CHECK
 def dateparse(datestring,seperator='.',reverse=False,american=False):
     import datetime
     parsedDate = datestring.split(seperator)
     if reverse:
         parsedDate = list(reversed(parsedDate))
     if american:
-        return datetime.date(int(parsedDate[0]),int(parsedDate[2]),int(parsedDate[1]))
+        return datetime.date(int(parsedDate[2]),int(parsedDate[0]),int(parsedDate[1]))
     else:
-        return datetime.date(int(parsedDate[0]),int(parsedDate[1]),int(parsedDate[2]))
+        return datetime.date(int(parsedDate[2]),int(parsedDate[1]),int(parsedDate[0]))
 
-def intput(msg,error=None) -> int:
+def intput(msg: str,error=None) -> int:
     response = None
     while response is None:
         try:
@@ -193,4 +195,13 @@ def intput(msg,error=None) -> int:
             if error is not None:
                 print(error)
     return response
-        
+
+def num_input(msg: str,error=None) -> float:
+    response = None
+    while response is None:
+        try:
+            response = float(input(msg))
+        except Exception: #Catches both ValueError and UnicodeExceptions
+            if error is not None:
+                print(error)
+    return response
