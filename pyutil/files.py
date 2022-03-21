@@ -1,15 +1,15 @@
-def fileappend(filename,thing):
-    a = open(filename, 'a')
+def fileappend(filename, thing, encoding=None):
+    a = open(filename, 'a', encoding=encoding)
     a.write(str(thing))
     a.close()
 
-def fileoverwrite(filename,thing):
-    a = open(filename, 'w')
+def fileoverwrite(filename, thing, encoding=None):
+    a = open(filename, 'w', encoding=encoding)
     a.write(str(thing))
     a.close()
 
-def filereplace(filename, patternToReplace, replacementString, out=None, regex=False):
-    with open(filename, 'r+') as f:
+def filereplace(filename, patternToReplace, replacementString, out=None, regex=False, encoding=None):
+    with open(filename, 'r+', encoding=encoding) as f:
         file_content = f.read()
         if regex:
             from re import sub
@@ -21,12 +21,12 @@ def filereplace(filename, patternToReplace, replacementString, out=None, regex=F
             f.truncate(0)
             f.write(new_content)
         else:
-            with open(out, 'w') as out_file:
+            with open(out, 'w', encoding=encoding) as out_file:
                 out_file.write(new_content) # Opening as 'w' means I overwrite all content in that file
 
-def filereplace_multi(filename, replacementMap, out=None):
+def filereplace_multi(filename, replacementMap, out=None, encoding=None):
     from re import compile, sub, escape
-    with open(filename, 'r+') as f:
+    with open(filename, 'r+', encoding=encoding) as f:
         file_content = f.read()
         regex_pattern = compile(f"({'|'.join(map(escape, replacementMap.keys()))})")
         new_content = regex_pattern.sub(lambda match_object: replacementMap[match_object.string[match_object.start():match_object.end()]], file_content)
@@ -35,6 +35,6 @@ def filereplace_multi(filename, replacementMap, out=None):
             f.truncate(0)
             f.write(new_content)
         else:
-            with open(out, 'w') as out_file:
+            with open(out, 'w', encoding=encoding) as out_file:
                 out_file.write(new_content) # Opening as 'w' means I overwrite all content in that file
     
